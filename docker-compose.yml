@@ -1,0 +1,31 @@
+version: '2'
+services:
+
+  flask:
+    build: ./0ak
+    restart: always
+    volumes:
+      - "$PWD/0ak:/0ak"
+    expose:
+      - 80
+    networks:
+      - net
+
+  # 基本环境
+  nginx:
+    image: nginx:latest
+    command: nginx -g 'daemon off;'
+    restart: always
+    # 数据卷
+    volumes:
+      - "$PWD/conf.d:/etc/nginx/conf.d"
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - net
+
+networks:
+    # 配置docker network
+    net:
+      driver: bridge

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import static_file %}
+{% from 'bootstrap/pagination.html' import render_pager %}
+{% block head_title %}
+    {{ cname ~ " - 0aKarmA" }}
+{% endblock %}
+{% block content %}
+    
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-header flex justify-content-center align-items-center" style="background-image: url('{{url_for('static',filename='images/geek-bg.jpg')}}')">
+                    <h1>{{ cname|safe }}</h1>
+                </div><!-- .page-header -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-9 col-lg-3">
+                    <a href="">
+                        <div class="yt-subscribe">
+                            <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="Youtube Subscribe">
+                            <h3>Subscribe</h3>
+                            <p>to my channel</p>
+                        </div><!-- .yt-subscribe -->
+                    </a>
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+</div><!-- .hero-section -->
+
+<div class="container single-page contact-page">
+    <div class="row">
+        <div class="col-12 col-lg-9">
+            <div class="content-wrap">
+                {% if posts %}
+                    {% for post in posts %}
+                        <article class="">
+                            <section class="each-post">
+                                <a href="{{ url_for('.show_post', post_slug=post.pslug) }}">
+                                    <p>
+                                        {% if post.poster %}
+                                            <img src="{{ post.poster }}"">
+                                        {% else %}
+                                            <img src="{{ url_for('static', filename='images/slider.jpg') }}"">
+                                        {% endif %}
+                                    </p>
+                                </a>
+                                <div class="infor-post"">
+                                    <a href="{{ url_for('.show_post', post_slug=post.pslug) }}"><h2 class="post-title">{{ post.ptitle }}</h2></a>
+                                    <div class="post-meta">
+                                        <span class="post-time">{{ moment(post.timestamp).format('LL') }}</span>
+                                        <span class="post-tags">
+                                        
+                                                {% for tag in post.tags %}
+                                                <a href="{{ url_for('.show_tag', tname=tag.tname) }}">{{ tag.tname }}</a>
+                                                {% endfor %}
+                                        </span>                      
+                                    </div>
+                                </div>
+                            </section>
+                        </article>
+
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                    {% endfor %}
+                <div class="page-footer">{{ render_pager(pagination) }}</div>
+            {% else %}
+                <div class="tip">
+                    <h5>No posts yet.</h5>
+                </div>
+
+            {% endif %}
+               
+            </div><!-- .content-wrap -->
+        </div><!-- .col -->
+
+       {% include 'blog/_sidebar.html' %}
+       
+    </div><!-- .row -->
+</div><!-- .container -->
+{% block author %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}New Post{% endblock %}
+
+{% block content %}
+    <div class="">
+        <h1>
+            New Post
+            {% include 'admin/_adminnav.html' %}
+        </h1>
+    </div>
+    {{ render_form(form) }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/ckeditor/ckeditor.js') }}"></script>
+    {{ ckeditor.config(name='body') }}
+{% endblock %}
+{% block author %}{% endblock %}
+{% block footer %}{% endblock %}

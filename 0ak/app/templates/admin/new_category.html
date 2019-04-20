@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}New Category{% endblock %}
+
+{% block content %}
+    <div class="">
+        <h1>
+            New Category
+            {% include 'admin/_adminnav.html' %}
+        </h1>
+    </div>
+    
+    {{ render_form(form) }}
+{% endblock %}

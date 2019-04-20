@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import static_file %}
+{% block head_title %}
+    {{ posts.ptitle ~ " - 0aKarmA" }}
+{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-header flex justify-content-center align-items-center" style="background-image: url('{{url_for('static',filename='images/geek-bg.jpg')}}')">
+                    <h1>{{ posts.category_name|safe }}</h1>
+                </div><!-- .page-header -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+
+
+</div><!-- .hero-section -->
+
+<div class="acontainer single-page blog-page">
+    <div class="row">
+        <div class="col-12">
+            <div class="content-wrap">
+                <header class="entry-header">
+                    <div class="posted-date">
+                        {{ moment(posts.timestamp).format('LL') }}
+                    </div><!-- .posted-date -->
+
+                    <h2 class="entry-title">{{ posts.ptitle }}</h2>
+                    
+                    <div class="tags-links">
+                        {% for tag in posts.tags %}
+                        <a href="{{ url_for('.show_tag', tname=tag.tname) }}">#{{ tag.tname }}</a>
+                        {% endfor %}
+                    </div><!-- .tags-links -->
+                    
+                </header><!-- .entry-header -->
+                {% if toc %}
+                    {% block toc %}
+                        <div class="col-md-4 toc">
+                            <h3 id="title">Tables Of Contents</h3>
+                            
+                            {{ toc|safe }}
+                            <hr>
+                        </div>
+                        
+                    {% endblock toc %}
+                {% else %}
+                        
+                {% endif %}
+                    
+                {% if posts.desc_html %}
+                <blockquote class="blockquote-text">
+                    {{ posts.desc_html | safe }}
+                 </blockquote><!-- .blockquote-text -->
+                {% else %}
+                        
+                {% endif %}
+               
+                    
+                <div class="entry-content">
+                    {% if posts.body_html %}
+                        {{ posts.body_html | safe }}
+                    {% else %}
+                        {{ posts.body }}
+                    {% endif %}
+                </div><!-- .entry-content -->
+
+                
+
+                <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
+                    <ul class="post-share flex align-items-center order-3 order-lg-1">
+                        <label>Share</label>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul><!-- .post-share -->
+                </footer><!-- .entry-footer -->
+                {% block author %}
+                <div class="author text-center">
+                    <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="">
+                    <h3>root</h3>
+                    <p>Author Introduction</p>
+                    <span>Chengdu <a href="https://www.0akarma.com">https://www.0akarma.com</a></span>
+                    <section class="share">
+                        <div class="share-icon">
+                            <a href=""><i class="fa fa-weibo fa-3x "></i></a>
+                            <a href=""><i class="fa fa-twitter fa-3x "></i></a>
+                            <a href=""><i class="fa fa-github fa-3x "></i></a>
+                            <a href=""><i class="fa fa-instagram fa-3x "></i></a>
+                            <a href=""><i class="fa fa-envelope fa-3x "></i></a>
+                        </div>
+                    </section>
+                </div>
+
+                {% endblock %}
+            </div><!-- .content-wrap -->
+        </div><!-- .col -->
+    </div><!-- .row -->
+</div><!-- .container -->
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<link href="{{url_for('static',filename='js/prettify.css')}}" type="text/css" rel="stylesheet">
+<script src="{{url_for('static',filename='js/prettify.js')}}"></script>
+<script>
+    var div = document.createElement("div");
+    div.className = 'jsx-1971258402 window-controls'
+    innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg>';
+    $(".prettyprint").wrap(div);
+    $(innerHTML).insertBefore($(".prettyprint"))
+    
+    $("pre").addClass("prettyprint linenums");
+    $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto');
+    $(function() {
+        window.prettyPrint && prettyPrint();
+    });
+</script>
+{% endblock %}

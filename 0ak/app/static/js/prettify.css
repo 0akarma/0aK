@@ -1,0 +1,33 @@
+/*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
+.prettyprint{background:black;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace;border:0!important}.pln{color:#e6e9ed}ol.linenums{margin-top:0;margin-bottom:0;color:#656d78}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em;background-color:black;list-style-type:decimal !important}@media screen{.str{color:#ffce54}.kwd{color:#4fc1e9}.com{color:#656d78}.typ{color:#4fc1e9}.lit{color:#ac92ec}.pun{color:#e6e9ed}.opn{color:#e6e9ed}.clo{color:#e6e9ed}.tag{color:#ed5565}.atn{color:#a0d468}.atv{color:#ffce54}.dec{color:#ac92ec}.var{color:#e6e9ed}.fun{color:#e6e9ed}}
+.window-controls.jsx-1971258402 {
+    background: black;
+    min-width: inherit;
+    position: relative;
+    z-index: 1;
+    border-radius: 5px;  
+    text-align: left !important;
+    box-shadow: rgba(0, 0, 0, 0.55) 0px 10px 38px;
+    padding-bottom: .5rem;
+    margin-bottom: 1rem;
+}
+.jsx-1971258402 window-controls{
+    margin-top: -24px;
+    position: relative;
+    top: 34px;
+    margin-left: 14px;
+    z-index: 2;
+}
+svg {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+code.prettyprint ol.linenums, pre.prettyprint ol.linenums{
+    padding: 0 0 0 25px !important;
+}
+
+span {
+    font-style: normal;
+}

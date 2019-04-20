@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head_title %}404 Error{% endblock %}
+<link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
+
+{{ static_file('css', 'css/404.css') }}
+
+{% block content %}
+{{ static_file('css', 'css/404.css') }}
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <h1>Oops!</h1>
+                <h2>404 - The Page can't be found</h2><!-- This templates was made by Colorlib (https://colorlib.com) -->
+            </div>
+            <a href="{{ url_for('blog.index') }}">Go TO Homepage</a>
+        </div>
+    </div>
+{% endblock %}

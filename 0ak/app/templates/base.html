@@ -1,0 +1,239 @@
+{% from 'macros.html' import static_file %}
+
+<!DOCTYPE html>
+<html>
+<head>
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    {% block seo %}
+    {% endblock %}
+    <title>{% block head_title %}0ak's Blog @ Demo {% endblock %}</title>
+    {% block styles %}
+        
+        
+        {{ static_file('css', 'css/bootstrap.min.css') }}
+
+        
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='%s.css' % request.cookies.get('theme', 'dark')) }}"
+              type="text/css">
+
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+{% endblock %}
+</head>
+<body>
+<div class="outer-container">
+    <header class="site-header">
+        <div class="top-header-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 flex align-items-center">
+                        <div class="header-bar-text d-none d-lg-block">
+                            <p>「STAY HUNGRY, STAY FOOLISH」</p>
+                        </div>
+
+                        <div class="header-bar-email d-none d-lg-block">
+                            <a>The quiter you be, the more you can hear.</a>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
+                        <div class="header-bar-social d-none d-md-block">
+                            <ul class="flex align-items-center">
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="header-bar-search d-none d-md-block">
+                            <form action="{{ url_for('blog.search') }}">
+                                <input name="q" type="search" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-header-bar">
+            <div class="container-fluid">
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="site-branding flex flex-column align-items-center">
+                        <h1 class="site-title"><a href="{{ url_for('blog.index') }}" rel="home">0aKarma</a></h1>
+                        <p class="site-description">Personal site</p>
+                    </div>
+                    {% block nav %}
+                    {% if categories %}
+                        <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
+                            <li class="current-menu-item"><a href="{{ url_for('blog.index') }}">Home</a></li>
+                            {% for category in categories %}
+                            <li><a href="{{ url_for('blog.show_category', category_name=category.cname) }}">{{ category.cname }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="header-bar-search d-md-none">
+                            <form action="{{ url_for('blog.search') }}">
+                                    <input name="q" type="search" placeholder="Search">
+                            </form>
+                        </div>
+                    </nav>
+                    {% else %}
+                    
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
+                            <li class="current-menu-item"><a href="{{ url_for('blog.index') }}">Home</a></li>
+                            <li><a href="{{ url_for('blog.show_category', category_name='blog') }}">blog</a></li>
+                            <li><a href="{{ url_for('blog.about') }}">about</a></li>
+                            
+                        </ul>
+
+                        <div class="header-bar-search d-md-none">
+                            <form action="{{ url_for('blog.search') }}">
+                                    <input name="q" type="search" placeholder="Search">
+                            </form>
+                        </div>
+                    </nav>
+                    {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<div class="outer-container">
+    {% block content %}{% endblock %}
+</div>
+<footer class="sit-footer">
+<div class="outer-container">
+    {% block footer %}
+
+        <div class="footer-bar">
+        <div class="outer-container">
+            <div class="container-fluid">
+                <div class="row justify-content-between">
+                        <div class="footer">
+                            <div class="footer-copyright">
+                                <p>0ak's Blog &copy; <script>document.write(new Date().getFullYear());</script></p>
+                                <p>Power by Flask </a><i class="fa fa-heart-o" aria-hidden="true"></i> Theme <a href="https://github.com/akkayin/0aK" target="_blank">0ak</a></p>
+                            </div>
+                            
+                            
+                            <div class="footer-visit">
+                                <span>Up Time:</span>
+                                <span id="htmer_time"></span>
+                                <!--<span id="busuanzi_container_site_uv">
+                                    <i class="fa fa-user" aria-hidden="true"></i> <span id="busuanzi_value_site_uv"></span> |
+                                </span>
+                                <span id="busuanzi_container_page_pv">
+                                    <i class="fa fa-eye animated infinite pulse" ></i> <span id="busuanzi_value_page_pv"></span>
+                                </span>
+                                -->
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+        
+    {% endblock %}
+</div>
+</footer>
+{% block scripts %}
+{{ moment.include_moment(local_js=url_for('static', filename='js/jquery-3.2.1.min.js')) }}
+{{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+<script type='text/javascript' defer="defer" src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+<script type='text/javascript' defer="defer" src="{{ url_for('static', filename='js/custom.js') }}"></script>
+{% endblock %}
+<script>
+    function secondToDate(second) {
+        if (!second) {
+            return 0;
+        }
+        var time = new Array(0, 0, 0, 0, 0);
+        if (second >= 365 * 24 * 3600) {
+            time[0] = parseInt(second / (365 * 24 * 3600));
+            second %= 365 * 24 * 3600;
+        }
+        if (second >= 24 * 3600) {
+            time[1] = parseInt(second / (24 * 3600));
+            second %= 24 * 3600;
+        }
+        if (second >= 3600) {
+            time[2] = parseInt(second / 3600);
+            second %= 3600;
+        }
+        if (second >= 60) {
+            time[3] = parseInt(second / 60);
+            second %= 60;
+        }
+        if (second > 0) {
+            time[4] = second;
+        }
+        return time;
+    }
+</script>
+<script type="text/javascript" language="javascript">
+    function setTime() {
+        // 博客创建时间秒数，时间格式中，月比较特殊，是从0开始的，所以想要显示5月，得写4才行，如下
+        var create_time = Math.round(new Date(Date.UTC(2019, 0, 17, 7, 0, 0))
+                .getTime() / 1000);
+        // 当前时间秒数,增加时区的差异
+        var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+        currentTime = secondToDate((timestamp - create_time));
+        currentTimeHtml = currentTime[0] + ' Years ' + currentTime[1] + ' Days '
+                + currentTime[2] + ' Hours ' + currentTime[3] + ' Mins ' + currentTime[4]
+                + 's';
+        document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+    }
+    setInterval(setTime, 1000);
+</script>
+<script type="text/javascript">
+$(function(){
+    //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+    $(function () {
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>100){
+                $("#toTop").fadeIn(1500);
+            }
+            else
+            {
+                $("#toTop").fadeOut(1500);
+            }
+        });
+        //当点击跳转链接后，回到页面顶部位置
+        $("#toTop").click(function(){
+            $('body,html').animate({scrollTop:0},870);
+            return false;
+        });
+    });
+});
+</script>
+<a href="javascript:void(0)" id="toTop"><i class="fa fa-arrow-up fa-2x"></i></a>
+</body>
+</html>

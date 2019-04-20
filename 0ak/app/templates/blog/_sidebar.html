@@ -1,0 +1,23 @@
+
+{% if postcount %}
+<div class="col-12 col-lg-3">
+    <div class="sidebar">
+        <h3>Statistics</h3>
+        <hr></hr>
+        <div class="">
+            <p>All Posts: {{ postcount }}</p>
+            <p>Last Modified: {{ modified.lastmodified }}</p>
+            <p><a href="{{ url_for('blog.change_theme') }}">Change Theme</a></p>
+        </div>
+{% endif %}
+{% if tags %}
+        <h3>Tags</h3>
+        <hr></hr>
+        <div class="tags-list">
+        {% for tag in tags %}
+            <a href="{{ url_for('.show_tag', tname=tag.tname) }}">{{ tag.tname }}</a>
+        {% endfor %} 
+        </div><!-- .tags-list -->
+    </div><!-- .sidebar -->
+</div><!-- .col -->
+{% endif %}
